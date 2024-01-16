@@ -1,0 +1,34 @@
+
+L
+java:S3740W"/Provide the parametrized type for this generic.( ç¡ã8ÂÓ†Ñ1
+Q
+java:S3740Z"/Provide the parametrized type for this generic.(ºšãÿıÿÿÿÿ8ÃÓ†Ñ1
+L
+java:S3740]"/Provide the parametrized type for this generic.(Œà•®8ÃÓ†Ñ1
+Q
+java:S3740`"/Provide the parametrized type for this generic.(á¹ŸŒÿÿÿÿÿ8ÃÓ†Ñ1
+Q
+java:S3740c"/Provide the parametrized type for this generic.(”Ú£öÿÿÿÿÿ8ÃÓ†Ñ1
+L
+java:S3740f"/Provide the parametrized type for this generic.(´÷¸ 8ÃÓ†Ñ1
+¤
+java:S1186”"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(²Ñ¤·ùÿÿÿÿ8ÇÓ†Ñ1
+
+java:S1186˜"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ç¸ÍP8ÇÓ†Ñ1
+Ÿ
+java:S1186œ"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ô¢²¡8ÇÓ†Ñ1
+Ÿ
+java:S1186 "€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(†›†ò8ÇÓ†Ñ1
+¤
+java:S1186¤"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ß‡ğíşÿÿÿÿ8ÈÓ†Ñ1
+¤
+java:S1186¨"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ö´ñıÿÿÿÿ8ÈÓ†Ñ1
+T
+java:S1172"2Remove this unused method parameter "actionEvent".(ŒÓçşÿÿÿÿ8ËÓ†Ñ1
+j	java:S100˜"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ç¸ÍP8ÍÓ†Ñ1
+R
+java:S1128"5Remove this unused import 'bo.custom.ItemCategoryBo'.(÷øš»8¢ªç†Ñ1
+M
+java:S1128"0Remove this unused import 'dto.ItemCategoryDto'.(Ó·ÉÙ8¢ªç†Ñ1
+T
+java:S1128"7Remove this unused import 'java.awt.event.ActionEvent'.(Úù“‘8¢ªç†Ñ1
