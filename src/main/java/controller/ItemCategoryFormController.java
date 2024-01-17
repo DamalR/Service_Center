@@ -6,11 +6,15 @@ import dao.util.BoType;
 import dto.ItemCategoryDto;
 import dto.tm.ItemCategoryTm;
 import dto.tm.ItemCategoryTm2;
+import dto.tm.ItemTm;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -22,6 +26,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 
 public class ItemCategoryFormController {
@@ -29,6 +35,9 @@ public class ItemCategoryFormController {
     public Button btnSaveItemCategory;
     public TableColumn colItemCategoryIdT2;
     public TableColumn colItemCategoryNameT2;
+    public Button btnReload;
+    public BorderPane paneItemCategory;
+    public Button btnBack;
     @FXML
     private BorderPane pane;
 
@@ -129,6 +138,7 @@ public class ItemCategoryFormController {
         tblItemCategory.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             setData((ItemCategoryTm2) newValue);
         });
+
     }
 
     private void loadItemCategoryTable2() {
@@ -144,6 +154,7 @@ public class ItemCategoryFormController {
                         dto.getCategoryName(),
                         btn
                 );
+                btn.setOnAction(actionEvent -> deleteItemCategory(c.getCategoryId()));
                 tmList.add(c);
             }
             tblItemCategory.setItems(tmList);
@@ -200,16 +211,16 @@ public class ItemCategoryFormController {
     }
 
 
-    public void homeButtonOnAction(javafx.event.ActionEvent actionEvent) {
-        Stage stage = (Stage) pane.getScene().getWindow();
-        try {
+    public void homeButtonOnAction(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) paneItemCategory.getScene().getWindow();
+
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/DashboardForm.fxml"))));
-            stage.setTitle("Dashboard Form");
-            stage.show();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+
+        stage.show();
+
+
     }
+
 
     public void OrderButtonOnAction(javafx.event.ActionEvent actionEvent) {
 
@@ -240,7 +251,7 @@ public class ItemCategoryFormController {
             if (isSaved){
                 new Alert(Alert.AlertType.INFORMATION,"Item Category Saved!").show();
                 loadItemCategoryTable();
-//                clearFields();
+                clearFields();
             }
         } catch (SQLIntegrityConstraintViolationException ex){
             new Alert(Alert.AlertType.ERROR,"Duplicate Entry").show();
@@ -248,5 +259,47 @@ public class ItemCategoryFormController {
             e.printStackTrace();
         }
     }
+    private void clearFields() {
+        txtFieldItemCategoryId.clear();
+        txtFieldItemCategoryName.clear();
 
+    }
+
+    public void reloadButtonOnAction(ActionEvent actionEvent) {
+        loadItemCategoryTable2();
+        tblItemCategory.refresh();
+
+    }
+
+    public void SearchButtonOnActionT2(ActionEvent actionEvent) {
+
+    }
+
+    public void SearchButtonOnActionT1(ActionEvent actionEvent) {
+        txtFieldItemCategoryT1.textProperty().addListener((observable, oldValue, newValue) -> {
+            tblItemCategoryT1.getItems().clear();
+
+
+            List<ItemCategoryTm> filteredItems = tblItemCategoryT1.getItems().stream()
+                    .filter(item ->
+                            item.getColItemCategoryId().contains(newValue) ||
+                                    item.getColItemCategoryName().contains(newValue)
+                    )
+                    .collect(Collectors.toList());
+
+            tblItemCategoryT1.getItems().addAll(filteredItems);
+        });
+
+    }
+
+    public void backButtonOnAction(ActionEvent actionEvent) {
+        Stage stage = (Stage) paneItemCategory.getScene().getWindow();
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/DashboardForm.fxml"))));
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+}
+
+    }
 }

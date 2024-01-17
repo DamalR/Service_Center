@@ -39,6 +39,7 @@ public class OrderFormController {
     public Text txtSearchCustomerT2;
     public TextField txtFieldSearchCustomerT2;
     public Button btnSearchCustomerT2;
+    public BorderPane pane;
     @FXML
     private BorderPane pane2;
 
@@ -272,7 +273,7 @@ public class OrderFormController {
 
     public void addCustomerButtonOnAction(javafx.event.ActionEvent actionEvent) {
 
-        Stage stage = (Stage) pane2.getScene().getWindow();
+        Stage stage = (Stage) pane.getScene().getWindow();
         try {
             stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/AddCustomerForm.fxml")))));
             stage.setTitle("Customer Form");

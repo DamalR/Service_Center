@@ -7,7 +7,9 @@ import dao.custom.EmployeeDao;
 import dao.util.DaoType;
 import dto.EmployeeDto;
 import dto.ItemCategoryDto;
+import dto.ItemDto;
 import entity.Employee;
+import entity.Item;
 import entity.ItemCategory;
 
 import java.sql.SQLException;
@@ -36,27 +38,25 @@ public class EmployeeBoImpl implements EmployeeBo {
 
     @Override
     public boolean deleteCustomer(String id) throws SQLException, ClassNotFoundException {
-        return false;
+        return employeeDao.delete(id);
     }
 
     @Override
     public List<EmployeeDto> allEmployees() throws SQLException, ClassNotFoundException {
-        return null;
+        List<Employee> entityList = employeeDao.getAll();
+        List<EmployeeDto> list = new ArrayList<>();
+        for (Employee employee : entityList) {
+            list.add(new EmployeeDto(
+                    employee.getEmpId(),
+                    employee.getName(),
+                    employee.getContactNumber(),
+                    employee.getEmail(),
+                    employee.getUserName(),
+                    employee.getPassword()
+            ));
+        }
+        return list;
     }
 
-//    @Override
-//    public List<EmployeeDto> allEmployees() throws SQLException, ClassNotFoundException {
-//        List<Employee> entityList = employeeDao.getAll();
-//        List<ItemCategoryDto> list = new ArrayList<>();
-//        for (Employee employee : entityList) {
-//            list.add(new EmployeeDto(
-//                    employee.getEmpId(),
-//                    employee.getEmail(),
-//                    employee.getContactNumber(),
-//                    employee.getUserName(),
-//                    employee.getPassword()
-//            ));
-//        }
-//        return list;
 
 }

@@ -196,7 +196,7 @@
                                           <RowConstraints maxHeight="-Infinity" prefHeight="25.0" />
                                        </rowConstraints>
                                        <children>
-                                          <Text fx:id="txtSearchItemIdT2" strokeType="OUTSIDE" strokeWidth="0.0" text="Serach Item ID :" wrappingWidth="109.53857421875" />
+                                          <Text fx:id="txtSearchItemIdT2" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Item ID :" wrappingWidth="109.53857421875" />
                                           <TextField fx:id="txtFieldSearchItemT2" prefWidth="140.0" GridPane.columnIndex="1" />
                                           <Button fx:id="btnSearchItemT2" mnemonicParsing="false" text="Search" GridPane.columnIndex="3" />
                                        </children>
@@ -241,6 +241,7 @@
                                               <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
                                                 <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
                                                 <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
                                                 <Text fx:id="txtItemIdT2" strokeType="OUTSIDE" strokeWidth="0.0" text="Item ID :" wrappingWidth="80.81787109375" />
@@ -253,6 +254,8 @@
                                                 <TextField fx:id="txtFieldItemCategoryT2" GridPane.columnIndex="4" GridPane.rowIndex="2" />
                                                 <Text fx:id="txtCostT2" strokeType="OUTSIDE" strokeWidth="0.0" text="Image :" GridPane.rowIndex="4" />
                                                 <TextField fx:id="txtFieldCostT2" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#updateButtonOnAction" text="Update" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                                <Button fx:id="btnReloadT2" mnemonicParsing="false" onAction="#reloadT2ButtonOnAction" text="Reload" GridPane.columnIndex="4" GridPane.rowIndex="4" />
                                              </children>
                                           </GridPane>
                                        </children>
@@ -321,10 +324,9 @@
                                                          <columns>
                                                             <TableColumn fx:id="colItemIdT3" text="Item ID" />
                                                             <TableColumn fx:id="colItemNameT3" prefWidth="112.0" text="Item Name" />
-                                                            <TableColumn fx:id="colCategoryT3" prefWidth="120.0" text="ItemCategory" />
-                                                            <TableColumn fx:id="colFaultT3" prefWidth="78.0" text="Fault" />
-                                                            <TableColumn fx:id="colImageT3" prefWidth="121.0" text="Image" />
-                                                            <TableColumn fx:id="colDeleteT3" prefWidth="126.0" text="Delete" />
+                                                            <TableColumn fx:id="colCategoryT3" prefWidth="179.0" text="ItemCategory" />
+                                                            <TableColumn fx:id="colFaultT3" prefWidth="113.0" text="Fault" />
+                                                            <TableColumn fx:id="colDeleteT3" prefWidth="153.0" text="Delete" />
                                                          </columns>
                                                       </TableView>
                                                    </children>

@@ -1,5 +1,6 @@
 package bo;
 
+import bo.custom.impl.CustomerBoImpl;
 import bo.custom.impl.EmployeeBoImpl;
 import bo.custom.impl.ItemBoImpl;
 import bo.custom.impl.ItemCategoryBoImpl;
@@ -20,6 +21,7 @@ public class BoFactory {
             case ITEMCATEGORY:return (T) new ItemCategoryBoImpl();
             case EMPLOYEE:return (T) new EmployeeBoImpl();
             case ITEM:return (T) new ItemBoImpl();
+            case CUSTOMER:return (T) new CustomerBoImpl();
 
         }
         return null;

@@ -1,4 +1,12 @@
 
-H
-java:S1168,"+Return an empty collection instead of null.(•πÔç8ñç€Ö—1
-]	java:S1250"<This block of commented-out lines of code should be removed.(õõãé¸ˇˇˇˇ8«˜≈Ö—1
+E
+java:S1128"(Remove this unused import 'dao.CrudDao'.(›í’≈8Œ∫ƒØ—1
+M
+java:S1128	"0Remove this unused import 'dto.ItemCategoryDto'.(”∑…Ÿ8œ∫ƒØ—1
+J
+java:S1128
+"(Remove this unused import 'dto.ItemDto'.(ûÇ∆ë˝ˇˇˇˇ8œ∫ƒØ—1
+E
+java:S1128"(Remove this unused import 'entity.Item'.(ùœ¬„8œ∫ƒØ—1
+R
+java:S1128"0Remove this unused import 'entity.ItemCategory'.(îôÈ¥ˇˇˇˇˇ8œ∫ƒØ—1

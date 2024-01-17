@@ -1,5 +1,7 @@
 package dto.tm;
 
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import lombok.*;
 
 @AllArgsConstructor
@@ -8,9 +10,12 @@ import lombok.*;
 @Setter
 @ToString
 public class ItemTm {
+
+
     private String itemId;
     private String name;
     private String fault;
     private String itemCategory;
-    private byte[] img;
+
+
 }

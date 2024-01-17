@@ -1,6 +1,7 @@
 package dao;
 
 import bo.custom.impl.ItemCategoryBoImpl;
+import dao.custom.impl.CustomerDaoImpl;
 import dao.custom.impl.EmployeeDaoImpl;
 import dao.custom.impl.ItemCategoryDaoImpl;
 import dao.custom.impl.ItemDaoImpl;
@@ -20,6 +21,7 @@ public class DaoFactory {
             case ITEMCATEGORY:return(T) new ItemCategoryDaoImpl();
             case EMPLOYEE:return(T) new EmployeeDaoImpl();
             case ITEM:return(T) new ItemDaoImpl();
+            case CUSTOMER:return(T) new CustomerDaoImpl();
         }
         return null;
     }

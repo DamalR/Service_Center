@@ -3,6 +3,8 @@ package dto.tm;
 import lombok.*;
 
 import java.awt.*;
+import java.util.Collection;
+
 import javafx.scene.control.Button;
 
 @AllArgsConstructor
@@ -14,4 +16,13 @@ import javafx.scene.control.Button;
 public class ItemCategoryTm  {
    private String categoryId;
    private String categoryName;
+
+
+   public Collection<Object> getColItemCategoryId() {
+      return null;
+   }
+
+   public Collection<Object> getColItemCategoryName() {
+      return null;
+   }
 }

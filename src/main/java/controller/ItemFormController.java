@@ -3,19 +3,23 @@ package controller;
 
 
 import bo.BoFactory;
-import bo.custom.EmployeeBo;
 import dao.util.BoType;
-import dto.EmployeeDto;
 import bo.custom.ItemBo;
 import dto.ItemDto;
+import dto.tm.ItemTm;
+import dto.tm.ItemTm2;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 
-import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.List;
 
 public class ItemFormController {
 
@@ -30,8 +34,11 @@ public class ItemFormController {
     public Text txtItemFault;
     public TextField txtFieldItemId;
     public Text txtItemId;
-    @FXML
-    private BorderPane pane;
+    public Button btnUpdate;
+    public BorderPane pane;
+    public Button btnReloadT2;
+
+
 
     @FXML
     private Button btnHome;
@@ -94,22 +101,21 @@ public class ItemFormController {
     private Button btnSearchItemT2;
 
     @FXML
-    private TableView<?> tblItemT2;
+    private TableView<ItemTm> tblItemT2;
 
     @FXML
-    private TableColumn<?, ?> colItemId;
+    private TableColumn colItemId;
 
     @FXML
-    private TableColumn<?, ?> colItemName;
+    private TableColumn colItemName;
+
+
 
     @FXML
-    private TableColumn<?, ?> colManufacture;
+    private TableColumn colFault;
 
-    @FXML
-    private TableColumn<?, ?> colFault;
 
-    @FXML
-    private TableColumn<?, ?> colCost;
+
 
     @FXML
     private TableColumn<?, ?> colDelete;
@@ -157,7 +163,7 @@ public class ItemFormController {
     private Button btnSearchT3;
 
     @FXML
-    private TableView<?> tblDeleteItem;
+    private TableView<ItemTm2> tblDeleteItem;
 
     @FXML
     private TableColumn<?, ?> colItemIdT3;
@@ -181,82 +187,141 @@ public class ItemFormController {
     private Label txtTitle;
     private ItemBo itemBo = BoFactory.getInstance().getBo(BoType.ITEM);
 
-    public void initialize(){
+    public void initialize() throws SQLException, ClassNotFoundException {
         comboBoxItemCategory.getItems().addAll("Electrical","Electronic");
+
+        colItemId.setCellValueFactory(new PropertyValueFactory<>("itemId"));
+        colItemName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colItemCategory.setCellValueFactory(new PropertyValueFactory<>("itemCategory"));
+        colFault.setCellValueFactory(new PropertyValueFactory<>("fault"));
+
+        loadItemTable();
+
+        tblItemT2.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            setData((ItemTm) newValue);
+        });
+
+        colItemIdT3.setCellValueFactory(new PropertyValueFactory<>("itemId"));
+        colItemNameT3.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colCategoryT3.setCellValueFactory(new PropertyValueFactory<>("fault"));
+        colFaultT3.setCellValueFactory(new PropertyValueFactory<>("itemCategory"));
+        colDeleteT3.setCellValueFactory(new PropertyValueFactory<>("btn"));
+        loadItemCategoryTable3();
+
+        tblDeleteItem.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+//            setData((ItemTm) newValue);
+        });
     }
 
-    @FXML
-    void OrderButtonOnAction(ActionEvent event) {
+    private void loadItemCategoryTable3() {
+        ObservableList<ItemTm2> tmList = FXCollections.observableArrayList();
+
+        try {
+            List<ItemDto> dtoList = itemBo.allItems();
+
+            for (ItemDto dto : dtoList) {
+                Button btn = new Button("Delete");
+                ItemTm2 c = new ItemTm2(
+                        dto.getItemId(),
+                        dto.getName(),
+                        dto.getFault(),
+                        dto.getItemCategory(),
+                        btn
+                );
+                btn.setOnAction(actionEvent -> deleteItem(c.getItemId()));
+                tmList.add(c);
+            }
+            tblDeleteItem.setItems(tmList);
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error loading customer table", e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void deleteItem(String id) {
+        try {
+            boolean isDeleted = itemBo.deleteCustomer(id);
+            if (isDeleted){
+                new Alert(Alert.AlertType.INFORMATION,"Customer Deleted!").show();
+                loadItemCategoryTable3();
+            }else{
+                new Alert(Alert.AlertType.ERROR,"Something went wrong!").show();
+            }
+
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setData(ItemTm newValue) {
+        if (newValue != null) {
+            txtFieldItemIdT2.setEditable(false);
+            txtFieldItemIdT2.setText(newValue.getItemId());
+            txtFieldItemNameT2.setText(newValue.getName());
+            txtFieldFaultT2.setText(newValue.getFault());
+            txtFieldItemCategoryT2.setText(newValue.getItemCategory());
+
+        }
+    }
+
+    private void loadItemTable() throws SQLException, ClassNotFoundException {
+        ObservableList<ItemTm> tmList = FXCollections.observableArrayList();
+
+        try {
+            List<ItemDto> dtoList = itemBo.allItems();
+
+            for (ItemDto dto : dtoList) {
+
+                ItemTm c = new ItemTm(
+                        dto.getItemId(),
+                        dto.getName(),
+                        dto.getFault(),
+                        dto.getItemCategory()
+                );
+                tmList.add(c);
+            }
+            tblItemT2.setItems(tmList);
+
+
+        }catch (SQLException e) {
+            throw new RuntimeException("Error loading customer table", e);
+        }
+    }
+
+
+    public void homeButtonOnAction(ActionEvent actionEvent) {
 
     }
 
-    @FXML
-    void homeButtonOnAction(ActionEvent event) {
+    public void OrderButtonOnAction(ActionEvent actionEvent) {
 
     }
 
-    @FXML
-    void itemButtonOnAction(ActionEvent event) {
+    public void itemCategoryButtonOnAction(ActionEvent actionEvent) {
 
     }
 
-    @FXML
-    void itemCategoryButtonOnAction(ActionEvent event) {
+    public void itemButtonOnAction(ActionEvent actionEvent) {
 
     }
 
-    @FXML
-    void reportButtonOnAction(ActionEvent event) {
+    public void userButtonOnAction(ActionEvent actionEvent) {
 
     }
 
-    @FXML
-    void saveButtonOnAction(ActionEvent event) {
+    public void reportButtonOnAction(ActionEvent actionEvent) {
 
     }
 
-    @FXML
-    void searchButtonT3OnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void userButtonOnAction(ActionEvent event) {
-
-    }
-
-    public void homeButtonOnAction(javafx.event.ActionEvent actionEvent) {
-
-    }
-
-    public void OrderButtonOnAction(javafx.event.ActionEvent actionEvent) {
-
-    }
-
-    public void itemCategoryButtonOnAction(javafx.event.ActionEvent actionEvent) {
-
-    }
-
-    public void itemButtonOnAction(javafx.event.ActionEvent actionEvent) {
-
-    }
-
-    public void userButtonOnAction(javafx.event.ActionEvent actionEvent) {
-
-    }
-
-    public void reportButtonOnAction(javafx.event.ActionEvent actionEvent) {
-
-    }
-
-    public void saveButtonOnAction(javafx.event.ActionEvent actionEvent) {
+    public void saveButtonOnAction(ActionEvent actionEvent) {
         try {
             boolean isSaved = itemBo.saveItem(
                     new ItemDto(txtFieldItemId.getText(),
                             txtFieldItemName.getText(),
                             txtFieldFault.getText(),
-                            comboBoxItemCategory.getSelectionModel().getSelectedItem().toString(),
-                            txtFieldImage.getText().getBytes()
+                            comboBoxItemCategory.getSelectionModel().getSelectedItem().toString()
                     ));
             if (isSaved){
                 new Alert(Alert.AlertType.INFORMATION,"Item Saved!").show();
@@ -270,8 +335,39 @@ public class ItemFormController {
 
     }
 
-    public void searchButtonT3OnAction(javafx.event.ActionEvent actionEvent) {
+    public void searchButtonT3OnAction(ActionEvent actionEvent) {
 
+    }
+
+    public void updateButtonOnAction(ActionEvent actionEvent) {
+        try {
+            boolean isUpdated = itemBo.updateItem(
+                    new ItemDto(txtFieldItemIdT2.getText(),
+                            txtFieldItemNameT2.getText(),
+                            txtFieldFaultT2.getText(),
+                            txtFieldItemCategoryT2.getText()
+                    ));
+            if (isUpdated){
+                new Alert(Alert.AlertType.INFORMATION,"Customer Updated!").show();
+
+                loadItemTable();
+                clearFields();
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void clearFields() {
+        txtFieldItemIdT2.clear();
+        txtFieldItemNameT2.clear();
+        txtFieldFaultT2.clear();
+        txtFieldItemCategoryT2.clear();
+
+    }
+    public void reloadT2ButtonOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        loadItemTable();
+        tblItemT2.refresh();
     }
 }
 

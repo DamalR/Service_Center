@@ -12,5 +12,5 @@ public class ItemDto {
     private String name;
     private String fault;
     private String itemCategory;
-    private byte[] img;
+
 }

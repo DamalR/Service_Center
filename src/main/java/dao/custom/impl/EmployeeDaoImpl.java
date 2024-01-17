@@ -4,8 +4,11 @@ import dao.custom.EmployeeDao;
 import dao.util.HibernateUtil;
 import dto.EmployeeDto;
 import entity.Employee;
+import entity.Item;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
 import java.sql.SQLException;
@@ -30,7 +33,15 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public boolean delete(String value) throws SQLException, ClassNotFoundException {
-        return false;
+        Configuration configuration = new Configuration()
+                .configure("hibernate.cfg.xml")
+                .addAnnotatedClass(Employee.class);
+        SessionFactory sessionFactory = configuration.buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        session.delete(session.find(Employee.class,value));
+        transaction.commit();
+        return true;
     }
 
     @Override
@@ -41,8 +52,5 @@ public class EmployeeDaoImpl implements EmployeeDao {
         return list1;
     }
 
-    @Override
-    public List<EmployeeDto> allEmployees() throws SQLException, ClassNotFoundException {
-        return null;
-    }
+
 }

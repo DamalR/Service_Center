@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ItemCategoryFormController">
+<BorderPane fx:id="paneItemCategory" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ItemCategoryFormController">
    <center>
       <GridPane BorderPane.alignment="CENTER">
          <columnConstraints>
@@ -52,13 +52,6 @@
                </rowConstraints>
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#96989a" height="490.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="140.0" GridPane.rowIndex="9" />
-                  <Button fx:id="btnHome" mnemonicParsing="false" prefHeight="31.0" prefWidth="127.0" text="Home" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                      <Button onAction="#homeButtonOnAction" text="Home" />
-
-                      <font>
-                        <Font name="Arial Bold" size="16.0" />
-                     </font>
-                  </Button>
                   <Button fx:id="btnOrder" mnemonicParsing="false" prefHeight="31.0" prefWidth="127.0" text="Order" GridPane.columnIndex="1" GridPane.rowIndex="4">
                       <Button onAction="#OrderButtonOnAction" text="Home" />
                       <font>
@@ -89,6 +82,7 @@
                         <Font name="Arial Bold" size="16.0" />
                      </font>
                   </Button>
+                  <Button fx:id="btnBack" mnemonicParsing="false" onAction="#backButtonOnAction" prefHeight="36.0" prefWidth="120.0" text="Home" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
             <TabPane prefHeight="356.0" prefWidth="636.0" tabClosingPolicy="UNAVAILABLE" GridPane.columnIndex="1">
@@ -136,7 +130,7 @@
                                        <children>
                                           <Text fx:id="txtSearchItemCategoryT1" strokeType="OUTSIDE" strokeWidth="0.0" text="Serach Item Category :" wrappingWidth="160.53857421875" />
                                           <TextField fx:id="txtFieldItemCategoryT1" prefWidth="140.0" GridPane.columnIndex="1" />
-                                          <Button fx:id="btnSearchItemCategoryT1" mnemonicParsing="false" text="Search" GridPane.columnIndex="3" />
+                                          <Button fx:id="btnSearchItemCategoryT1" mnemonicParsing="false" onAction="#SearchButtonOnActionT1" text="Search" GridPane.columnIndex="3" />
                                           <Text fx:id="txtItemCategoryID" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Category ID :" GridPane.rowIndex="2" />
                                           <TextField fx:id="txtFieldItemCategoryId" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                           <Text fx:id="txtItemCategoryName" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Category Name :" GridPane.rowIndex="4" />
@@ -206,8 +200,9 @@
                                        <columnConstraints>
                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="314.0" minWidth="10.0" prefWidth="155.0" />
                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="540.0" minWidth="10.0" prefWidth="169.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="102.0" minWidth="9.0" prefWidth="9.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="540.0" minWidth="10.0" prefWidth="307.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="102.0" minWidth="7.0" prefWidth="7.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.0" minWidth="10.0" prefWidth="186.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="540.0" minWidth="10.0" prefWidth="128.0" />
                                        </columnConstraints>
                                        <rowConstraints>
                                           <RowConstraints maxHeight="-Infinity" prefHeight="25.0" />
@@ -215,7 +210,8 @@
                                        <children>
                                           <Text fx:id="txtItemCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="Serach Item Category :" wrappingWidth="160.53857421875" />
                                           <TextField fx:id="txtFieldSearchItemCategory" prefWidth="140.0" GridPane.columnIndex="1" />
-                                          <Button fx:id="btnSearchItemCategory" mnemonicParsing="false" text="Search" GridPane.columnIndex="3" />
+                                          <Button fx:id="btnSearchItemCategory" mnemonicParsing="false" onAction="#SearchButtonOnActionT2" text="Search" GridPane.columnIndex="3" />
+                                          <Button fx:id="btnReload" mnemonicParsing="false" onAction="#reloadButtonOnAction" text="Reload" GridPane.columnIndex="4" />
                                        </children>
                                     </GridPane>
                                     <GridPane GridPane.rowIndex="3">

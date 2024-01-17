@@ -17,5 +17,4 @@ public class Item {
     private String name;
     private String fault;
     private String itemCategory;
-    private byte[] img;
 }
